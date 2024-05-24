@@ -1,0 +1,30 @@
+.nav {
+    width: 100vw;
+    height: 50px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-list li {
+    display: inline;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #f3ce75;
+    cursor: pointer;
+}
+
+.nav-list li:hover {
+    background-color: 	#1b2853;
+}
+

@@ -1,0 +1,59 @@
+
+/* Small Panel Styles */
+.small-panel {
+    height: 50px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-panel p {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Large Panel Styles */
+.large-panel {
+    height: 450px;
+    width: 70%;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.large-panel p {
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    margin: 30px 20px;
+}
+
+.display-panel-info {
+    padding-left: 30px;
+    overflow-y: scroll;
+}
+
+.display-panel-info td {
+    text-align: center;
+    font-size: 15px;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.display-panel-info th {
+    font-weight: bold;
+    color: #f3ce75;
+}
+
+/* General styles */
+.panel-box {
+    border-radius: 10px;
+    background-color: #1b2853;
+    color: white;
+}

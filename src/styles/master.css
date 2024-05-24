@@ -1,0 +1,32 @@
+.set-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+.active {
+    background-color: #1b2853 !important;
+    color: #04c4ca !important;
+}
+
+/* Layout styles for the information */
+.set-page h1 {
+    text-align: center;
+    color: white;
+}
+
+.panel-flex-settings {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.large-panel-flex {
+    justify-content: center;
+
+}
+
+.small-panel-flex {
+    justify-content: start;
+    margin: 30px 0 20px 10px;
+}
