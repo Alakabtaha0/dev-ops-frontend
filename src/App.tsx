@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import "./styles/master.css";
 import "./styles/panel.css";
 import NavBar from './components/NavBar';
@@ -27,18 +27,21 @@ function App() {
 	 * Dependencies:
 	 * - `lastMessage`: The last message received from the WebSocket connection.
 	*/
+	const stableSendMessage = useCallback((message: any) => {
+		sendMessage(message);
+	}, [sendMessage]);
+
 	useEffect(() => {
 		if (lastMessage !== null) {
 			const data = JSON.parse(lastMessage.data);
 			setServices(data.services);
 			setWorkers(data.worker);
-			console.log(data.worker)
-			if (data.services.region !== region) {
+			console.log(data.worker);
+			if (region === "") {
 				setRegion(data.services.region);
 			}
 		}
-	}, [lastMessage]);
-
+	}, [lastMessage, region]);
 
 	/**
 	 * Effect hook that sends the current region to the WebSocket server when the region changes.
@@ -49,8 +52,8 @@ function App() {
 	 * - `region`: The current region state.
 	*/
 	useEffect(() => {
-		if (region !== "") sendMessage(region);
-	}, [region]);
+		if (region !== "") stableSendMessage(region);
+	}, [region, stableSendMessage]);
 
 
 	return (
