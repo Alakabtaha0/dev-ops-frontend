@@ -12,7 +12,7 @@ function App() {
 	const [workers, setWorkers] = useState<Worker>({} as Worker);
 	const [region, setRegion] = useState<string>("");
 
-	const { sendMessage, lastMessage } = useWebSocket('ws://upscope-api-7670fe37cc52.herokuapp.com/', {
+	const { sendMessage, lastMessage } = useWebSocket('wss://upscope-api-7670fe37cc52.herokuapp.com/', {
 		onOpen: () => console.log('opened'),
 		onClose: () => console.log('closed'),
 		onError: (error) => console.error('WebSocket error: ', error),
