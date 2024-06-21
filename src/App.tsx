@@ -8,9 +8,42 @@ import SmallPanel from './components/SmallPanel';
 import LargePanel from './components/LargePanel';
 
 function App() {
-	const [services, setServices] = useState<Services>({} as Services);
-	const [workers, setWorkers] = useState<Worker>({} as Worker);
+	// const [services, setServices] = useState<Services>({} as Services);
+	const [servicesArray, setServicesArray] = useState<Array<Services>>([]);
+	// const [workers, setWorkers] = useState<Worker>({} as Worker);
+	const [workersArray, setWorkersArray] = useState<Array<Worker>>([]);
 	const [region, setRegion] = useState<string>("");
+	const services = servicesArray[0] || {};
+
+	const workers = workersArray.reduce((acc, val) => {
+		console.log("acc", acc);
+		console.log("val", val);
+		
+		return {
+			name: val.name,
+			workerInformation: {
+				wait_time: Math.max(acc.workerInformation.wait_time, val.workerInformation.wait_time),
+				workers: Math.max(val.workerInformation.workers),
+				waiting: Math.max(val.workerInformation.waiting),
+				idle: Math.max(val.workerInformation.idle),
+				time_to_return: Math.max(val.workerInformation.time_to_return, acc.workerInformation.time_to_return),
+				recently_blocked_keys: val.workerInformation.recently_blocked_keys,
+				top_keys: val.workerInformation.top_keys
+			}
+		} 
+	}, {
+		name: "",
+		workerInformation: {
+			wait_time: 0,
+			workers: 0,
+			waiting: 0,
+			idle: 0,
+			time_to_return: 0,
+			recently_blocked_keys: [],
+			top_keys: []
+		}
+	} as Worker)
+
 
 	const { sendMessage, lastMessage } = useWebSocket('wss://upscope-api-7670fe37cc52.herokuapp.com/', {
 		onOpen: () => console.log('opened'),
@@ -34,8 +67,12 @@ function App() {
 	useEffect(() => {
 		if (lastMessage !== null) {
 			const data = JSON.parse(lastMessage.data);
-			setServices(data.services);
-			setWorkers(data.worker);
+			const numberOfServers = data.services.serverCount;
+			setServicesArray(services => [...services, data.services].slice(-5));
+
+			console.log("number of servers", numberOfServers)
+			setWorkersArray(workers => [...workers, data.worker].slice(-5));
+			console.log(workersArray);
 			console.log(data.worker);
 			if (region === "") {
 				setRegion(data.services.region);

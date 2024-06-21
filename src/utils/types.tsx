@@ -26,7 +26,7 @@ export type TopKeys = {
 };
 
 export type WorkerInfo = {
-    idle: string;
+    idle: number;
     recently_blocked_keys: BlockedKeys[];
     time_to_return: number;
     top_keys: TopKeys[];
